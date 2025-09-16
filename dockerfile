@@ -10,4 +10,4 @@ RUN apt-get update && \
 COPY wisecow.sh /usr/local/bin/wisecow.sh
 RUN chmod +x /usr/local/bin/wisecow.sh
 EXPOSE 4499
-CMD ["/usr/local/bin/wisecow.sh"]
+ENTRYPOINT ["/usr/local/bin/wisecow.sh"]
