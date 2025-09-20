@@ -1,0 +1,21 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: wisecow-deployment
+  labels:
+    app: accu
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: accu
+  template:
+    metadata:
+      labels:
+        app: accu
+    spec:
+      containers:
+        - name: cont
+          image: anil1129/wisecow:0.1
+          ports:
+            - containerPort: 4499
