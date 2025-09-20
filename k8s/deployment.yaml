@@ -18,4 +18,4 @@ spec:
         - name: cont
           image: anil1129/wisecow:0.1
           ports:
-           - containerPort: 4499
+            - containerPort: 4499
