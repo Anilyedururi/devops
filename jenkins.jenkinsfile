@@ -17,12 +17,13 @@ pipeline {
         }
         stage("deploy to kubernetes") {
             steps {
-                withCredentials([file(credentialsId: 'kubeconfig-cred', variable: 'KUBECONFIG')]) {
+                withCredentials([aws(credentialsId: 'aws_k8s')]) {
                     sh """
-                    # Update deployment.yaml with the new image tag
+                    aws eks --region us-east-1 update-kubeconfig --name wise
                     sed -i 's|image: anil1129/wisecow:.*|image: anil1129/wisecow:${currentBuild.number}|' k8s/deployment.yaml
-                    # Apply the deployment and service
-                    kubectl --kubeconfig=\${KUBECONFIG} apply -f k8s/deployment.yaml
+                    kubectl apply -f k8s/deployment.yaml
+                    kubectl apply -f k8s/service.yaml
+                    kubectl apply -f k8s/ingress.yaml
                     """
                 }
             }
