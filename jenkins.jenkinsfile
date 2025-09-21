@@ -19,7 +19,7 @@ pipeline {
             steps {
                 withCredentials([aws(credentialsId: 'aws_k8s')]) {
                     sh """
-                    aws eks --region us-east-1 update-kubeconfig --name wise
+                    aws eks --region ap-south-1 update-kubeconfig --name cow
                     sed -i 's|image: anil1129/wisecow:.*|image: anil1129/wisecow:${currentBuild.number}|' k8s/deployment.yaml
                     kubectl apply -f k8s/deployment.yaml
                     kubectl apply -f k8s/service.yaml
